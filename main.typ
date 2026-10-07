@@ -86,6 +86,9 @@
       arr("quotient", "codomain", $exists ! overline(phi)$, "dashed"),
     ) #link(<universal-property>)[commutes]
   - Corollary: $phi: G -> G^prime$ group epimorphism, then induced map $overline(phi): G slash ker phi -> G^prime$ is both epimorphism and monomorphism, meaning isomorphism, i.e. $im phi tilde.eq G slash ker phi$
+- (1.10, p.65) $eta: G -> G^prime$ epimorphism, then there's bijection between the family of subgroups in $G$ in which $ker eta$ is contained, ${H subset.eq G | ker eta subset.eq H}$, and the family of _all_ subgroups in $G^prime$, given by $H mapsto eta(H)$.
+  - $H lt.closed.eq G <==> eta(H) lt.closed.eq G^prime$
+    - Composed homomorphism $((G^prime -> G^prime slash eta(H)) compose eta)$ has kernel $ker((y^prime mapsto y^prime eta(H)) compose (x mapsto^eta x^prime)) = H$, meaning (universal property, factors through, induced map, injective since $ker (G -> G slash H) = H$ too, surjective by epimorphism premise) we have isomorphism $G slash H arrow.r.tilde G^prime slash eta(H)$ given by $g H mapsto eta(g) eta(H)$.
 
 == Chapter 2
 
