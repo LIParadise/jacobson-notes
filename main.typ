@@ -73,7 +73,9 @@
   - $op("End") M$ the endomorphisms of a monoid $M$ is a monoid of transformations of the monoid, the _endormorphism monoid of $M$_
 - (1.9, p.61) *_Fundamental Theorem of Homomorphisms of Monoids and Groups_*
   - homomorphism gives congruence relations by considering fibers
-  - $phi$ is the same as first epimorphism to quotient and then (exist unique) momomorphism (induced map) to codomain
+  - Consider group. $L lt.closed.eq K = ker phi$ (so $phi$ is #link(<universal-property>)[compatible] with congruence defined by $L$), we have _induced homomorphism_ $overline(phi): a L mapsto phi(a)$, given by the _universal property_ satisfying $overline(phi) compose (a mapsto a L) = phi$. $ker overline(phi) = (ker phi) slash L = K slash L$ in particular $overline(phi)$ injective iff $K = L$.
+  - $ker phi = {e} <==> phi "injective"$ is for group: the monoid of strings has homomorphism to $NN$ by length, which has trivial kernel (the empty string) but certainly not injective
+  - $phi$ is equal to first epimorphism to quotient and then (exist unique) momomorphism (*induced map*) to codomain
   - #commutative-diagram(
       node((0, 0), $M$, "domain"),
       node((0, 1), $M^prime$, "codomain"),
@@ -83,6 +85,7 @@
       arr("domain", "codomain", $phi$),
       arr("quotient", "codomain", $exists ! overline(phi)$, "dashed"),
     ) #link(<universal-property>)[commutes]
+  - Corollary: $phi: G -> G^prime$ group epimorphism, then induced map $overline(phi): G slash ker phi -> G^prime$ is both epimorphism and monomorphism, meaning isomorphism, i.e. $im phi tilde.eq G slash ker phi$
 
 == Chapter 2
 
@@ -100,9 +103,32 @@
   - _field_ if the multiplicative monoid being commutative
   - _division subring_ if the subring is a division ring
 - (2.3, p.92) determinants require commutative rings
+- (2.3, p.94) _matrix units_ ${e_(i j)}$ e.g. $e_(2 3) = mat(0, 0, 0; 0, 0, 1; 0, 0, 0)$
+  - Do not commute: $e_(i j) e_(k l) = delta_(j k) e_(i l)$: Kronecker delta
+  - ${e_(i i)}$ are idempotent
+  - They are _not_ units in $M_n (R)$: consider $I = mat(1, 0, 0; 0, 1, 0; 0, 0, 1)$
+  - They span $M_n (R)$: $A = mat(a_(1 1), a_(1 2), dots, a_(1 n); a_(2 1), a_(2 2), dots, a_(2 n); dots; a_(n 1), , dots, a_(n 1)) = limits(sum)_(i j) a_(i j) e_(i j)$
+- (2.3, p.95) Identify $a in R$ in $M_n (R)$ by $op("diag") { a, a, dots, a }$
+  - $a I = I a = op("diag"){a, a, dots, a} subset.eq C_(M_n (R))({e_(i j)})$ as subring (exercise 6)
+  - $R -> {op("diag"){a, a, dots, a} | a in R} subset.eq M_n (R)$ isomorphism of rings: _embedding_ of $R$ in $M_n (R)$
+- (2.3, p.95) For *commutative ring* we have _determinant_: \ $det A = limits(sum)_sigma (op("sgn") sigma) a_(1 sigma(1)) a_(2 sigma(2)) a_(2 sigma(2)) dots a_(n sigma(n)) \ = limits(sum)_(k=1)^n a_(r k) A_(r k) \ = limits(sum)_(k=1)^n a_(k c) A_(k c)$: _cofactor expansion_
+  - $A_(r c)$ is _cofactor at row $r$ column $c$_ given by $(-1)^(r + c) det (A "sans column" c "and row" r)$
+  - Cofactor expansion using different rows/columns vanishes: $limits(sum)_k a_(x k) A_(x^prime k) = limits(sum)_k a_(k x) A_(k x^prime) = 0$ if $x eq.not x^prime$
+  - Writing $(op("adj") A) times A = A times (op("adj") A) = det A$ (recognize $R$ in $M_n (R)$ so $op("diag"){a, a, dots, a}$), define _adjoint_ $op("adj") A := (alpha_(i j))^T$ s.t. $(op("adj") A)_(r c) = alpha_(c r) = (-1)^(c+r) det (A "sans column" r "and row" c)$: here we use $alpha_(i j)$ for cofactor at row $i$ col $j$
+    - Note the transpose required for cofactor expansion is along rows/columns
+  - $det (A B) = det A dot det B$ and $det I = 1$ implies $det: M_n (R) -> R$ homomorphism, whereby the codomain is the multiplicative monoid of ring $R$
+    - $det (op("GL")_n (R)) = U(R)$
+  - $det A in U(R) <==> A^(-1) in M_n (R)$
+    - $<==$: $det A^(-1) dot det A = det A dot det A^(-1) = det I = 1$
+    - $==>$: $(det A)^(-1) op("adj") A$ suffices as inverse and is well-defined
 - (2.3, p.95) isomorphism of rings is defined to be map that's both isomorphism for the abelian group $+$ and the monoid $times$
 - (2.3, p.96) adjoint: $op("adj") A$ is s.t. its $r$ row $c$ col is the cofactor $A_(c,r) = (-1)^(c+r) det(A "sans row" c "sans col" r)$
   - note the swap of indices
+- (2.4, p.98) _quarternions_: $i^2 = j^2 = k^2 = -1 = i j k$
+  - $i j = -j i = k and j k = -k j = i and k i = -i k = j$
+  - Embedded in $M_2 (CC)$, ${mat(a, b; -overline(b), overline(a)) | {a, b} subset CC}$
+    - Division ring but not field, not commutative!
+    - Specifically $i = mat(sqrt(-1), 0; 0, -sqrt(-1)) and j = mat(0, 1; -1, 0) and k = mat(0, sqrt(-1); sqrt(-1), 0)$
 - (2.5, p.101) congruence for rings are s.t. it's congruence for both the abelian $+$ and the monoid $times$ i.e. $a equiv alpha and b equiv beta => a + b equiv alpha + beta and a b equiv alpha beta$
   - (congruence for both the additive abelian group and multiplicative monoid) iff (subgroup in additive abelian group and multiplication is absorbing), motivating the definition of _ideal_: subgroup to the additive group that is absorbing in both sides when multiplied
   - ideals are closed under intersection, thus define ideal _generated by_ some set $S$, denoted as $(S)$. We have $(S) = limits(sum)_(sigma in S) (limits(sum)_({ alpha, beta } subset.eq R) alpha sigma beta)$ (all summations are assumed to be of finite length)
@@ -119,7 +145,18 @@
   - $I J subset.eq I inter J$ but the converse does not hold in general
   - $(7)^2 = (49) subset.neq (7)$
 - (2.7, p.106) *homomorphism for rings* is $phi: R -> R^prime$ s.t. it's both a homomorphism for the additive group and the multiplicative monoid
-  - Ring homomorphism kernel $ker phi := phi^(-1) (0_(R^prime))$ is also the kernel of $phi$ as homomorphism on the additive group which turns out to be absorbing multiplicatively: ideal.
+  - kernel for ring homomorphism: $ker phi := phi^(-1) (0_(R^prime))$ is defined to be the kernel of $phi$ as homomorphism on the additive group. Congruence for both the additive abelian group and the multiplicative monoid, ideal.
+  - $eta: R -> R^prime$, $I subset.eq ker eta$ ideal, $pi: R -> R slash I$ natural epimorphism, then $eta$ factors through $R slash I$ uniquely (universal property) with $overline(eta): overline(a) = a + I mapsto eta(a)$ s.t. $eta = overline(eta) compose pi$
+  - $overline(eta)$ injective (thus monomorphism) iff $I = ker eta$
+  - #commutative-diagram(
+      node((0, 0), $R$, "domain"),
+      node((0, 1), $R^prime$, "codomain"),
+      node((1, 0), $R slash I$, "quotient"),
+      
+      arr("domain", "quotient", $pi$, "surj"),
+      arr("domain", "codomain", $eta$),
+      arr("quotient", "codomain", $exists ! overline(eta)$, "dashed"),
+    ) #link(<universal-property>)[commutes]
 - (2.7, p.109) _prime ring of $R$_ (modern notation *prime subring of $R$*): the smallest subring containing $1_R$ i.e. the subring generated by $1_R$
   - $phi: ZZ -> R$ given by $n mapsto n 1_R := limits(sum)_(i=1)^n 1_R$; image being subring, contained in any other subring that contains $1_R$, thus the smallest: prime subring in $R$
   - $im phi tilde.eq ZZ 1_R$ meaning $ker phi$ ideal in $ZZ$, meaning $ker phi = {0} or (k)$, the latter dubbed as _ring of residues modulo $k$_
@@ -182,3 +219,12 @@
     - powers must repeat, i.e. $x^m = x^n ==>^op("distro") x^n (x^(m-n) - 1) = 0 ==>^("domain") x^(m-n) = 1$
     - $g(x) = cases(0 "if" x < 0, x "if" x >= 0)$ and $f(x) = cases(x "if" x < 0, 0 "if" x >= 0)$: $cal(C)(RR)$, continuous endofunctions on $RR$, is a ring s.t. the only nilpotent is $(gamma mapsto 0)$ the zero function, but it's not a domain
 - (2.2, ex.7, p.91) Kaplansky: ${x, r, gamma} subset.eq R and r != gamma and x r = x gamma = 1_R$ then there's infinitely many elements s.t. $x y = 1_R$. Also show this is not the case for monoids.
+- (2.3, ex.6, p.97) Show that for any ring $R$ and _subset_ $S subset.eq R$, $C_R (S)$ the set of elements that commute with any $sigma in S$ is a subring in $R$. Note $C_R (R)$ is called the _center_ of the ring $R$. Find $C_(M_n (R))({e_(i j) | 1 <= i <= n and 1 <= j <= n})$ and $C_(M_n (R))(M_n (R))$.
+  - additive: (subgroup criterion) ${a, b} subset.eq C_R (S) ==> (a-b) sigma =^"distro" a sigma - b sigma =^"premise" sigma a - sigma b =^"distro" sigma(a-b)$ i.e. distributive law is both-sided
+  - multiplicative: trivial
+  - $C_(M_n (R))({e_(i j) | 1 <= i <= n and 1 <= j <= n})$
+    - Let $A = mat(bold(r)_1; bold(r)_2; bold(r)_3; dots; bold(r)_n) = mat(bold(c)_1 bold(c)_2 dots bold(c)_n)$
+    - $e_(i j) times A$ is all zeros except $i$-th row is $bold(r)_j$, while $A times e_(i j)$ is all zeros except $j$-th column is $c_i$.
+    - So the result is some $(a in R) dot e_(i j)$ whereby $a = r_(j j) = c_(i i)$, meaning $a_(i i) = a_(j j)$; the indices being arbitrary, $A$'s main diagonal is of same exact value
+    - the other values are wiped out, so $A = (a in R) dot I$
+    - For $M_n (R)$, we need stronger condition: ${a I | a in C_R (R) = Z(R)}$, e.g. we need $(a I) times (b I) = (a b) I = (b a) I = (b I) times (a I)$. Turns out this is sufficient, since $M_n (R)$ is linear combination of ${e_(i j)}$.
