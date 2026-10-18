@@ -90,6 +90,27 @@
   - $H lt.closed.eq G <==> eta(H) lt.closed.eq G^prime$
     - Composed homomorphism $((G^prime -> G^prime slash eta(H)) compose eta)$ has kernel $ker((y^prime mapsto y^prime eta(H)) compose (x mapsto^eta x^prime)) = H$, meaning (universal property, factors through, induced map, injective since $ker (G -> G slash H) = H$ too, surjective by epimorphism premise) we have isomorphism $G slash H arrow.r.tilde G^prime slash eta(H)$ given by $g H mapsto eta(g) eta(H)$.
 
+=== Generic Remarks
+
+- $sigma in S_n$, $(a_1, a_2, dots, a_m)$ single cycle of which members distinct, then $sigma compose ({a_i}) compose sigma^(-1) = (sigma(a_1), sigma(a_2), sigma(a_3), dots, sigma(a_m))$
+  - It suffices to show $sigma compose ({a_i}) compose sigma^(-1) compose (sigma(a_1), sigma(a_2), sigma(a_3), dots, sigma(a_m))^(-1) = id in S_n$
+  - $sigma(a_1) mapsto^({sigma(a_i)})^(-1) sigma(a_m) mapsto^(sigma^(-1)) a_m mapsto^(({a_i})) a_1 mapsto^sigma sigma(a_1)$
+  - $sigma in S_n$, meaning $x in {sigma(a_i)} <==> sigma^(-1)(x) in {a_i}$, thus $x in.not {sigma(a_i)} <==> sigma^(-1)(x) in.not {a_i}$
+  - $x mapsto^({sigma(a_i)})^(-1) x mapsto^(sigma^(-1)) sigma^(-1)(x) mapsto^(({a_i})) sigma^(-1)(x) mapsto^sigma x$
+- Conjugacy classes are equivalence relation and is exactly the types within symmetric group.
+  - $eta in op("Inn")(S_n)$ then $eta(tau) = sigma compose tau compose sigma^(-1)$ never cross any conjugacy class
+  - The type of some $sigma in S_n$ is defined to be the lengths of the cycles in its disjoint cycle decomposition when ordered non-decreasing/non-increasing.
+  - Suppose $tau^prime = sigma compose tau compose sigma^(-1)$, then by the preceding remark, we can "distribute" $sigma$ entry-wise to all the cycles in $tau$ and get disjoint cycle decomposition of $tau^prime$, meaning $tau$ and $tau^prime$ are of the same type.
+  - Suppose $tau^prime$ and $tau$ are of the same type, then entry-wise comparison we get a map mapping $tau$'s entry to $tau^prime$'s entry. Such map is injective since $tau^prime$ is in disjoint cycle decomposition; injective endofunction on finite set so bijection. Name it $sigma$ and we see $tau^prime = sigma compose tau compose sigma^(-1)$.
+- $phi in op("Aut")(S_n)$ then $phi$ sends conjugacy classes to conjugacy classes
+  - $phi(sigma tau sigma^(-1)) = phi(sigma) phi(tau) (phi(sigma))^(-1)$
+  - Not necessarily the same class...?: Maybe type ${(i j)}$ mapped to ${(a b)(c d)}$
+    - The type, i.e. disjoint cycle decomposition, contains only transpositions and singletons, for else the order would not be preserved
+    - Note ${(1 r) | 1 <= r <= n}$ is generating set for $S_n$
+    - $(x y) tilde (i j)$ then $phi((x y)) tilde phi((i j))$, meaning there's some _fixed_ constant $k >= 1$ s.t. $phi((i j)) = limits(product)_(l = 1)^k tau_l$ in disjoint transposition decomposition
+    - LHS has $binom(n, n-1)$ while RHS has $(limits(product)_(l=0)^(k-1) binom(n-2l, 2)) (1/k!) = n! / (2^k k! (n-2k)!)$
+    - $2^(k-1) = (n-2)! / (k! (n-2k)!)$, $k=1$ ok, $n > 2k >= 6$ then RHS some multiple of $binom(n-2, k)$ so the prime factorization mismatch
+
 === Exercises
 
 - (1.2, ex.7, p.36) Suppose $mu in M$ monoid and $alpha mu = mu beta = 1_M$, show that $alpha = beta$ meaning $mu$ is indeed a unit i.e. invertible.
