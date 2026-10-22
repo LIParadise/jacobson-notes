@@ -349,6 +349,26 @@
     - Suppose $q_1 != q_2$, then LHS has degree no less than $deg(g)$ by $D$ domain, $bot$
     - So $q_1 = q_2$, and $r_1 = r_2$ follows from the abelian additive group of the ring $D$
 
+=== Generic Remarks
+
+- A (left) $R$-module $(R, M)$ is a _ring homomorphism_ $R -> endo_ZZ (M)$, just like $G arrow.cw S$ group action is some group homomorphism $G -> aut(S)$
+  - $M$ is assumed to be abelian in modules. The set of all (group) endomorphisms on $M$ are called $endo_ZZ (M)$
+    - Addition by pointwise and multiplication by composition
+    - $(f compose (g+h))(x) + (f compose (g+h))(y) = f(g(x) + h(x)) + f(g(y) + h(y))$
+    - $(f compose (g+h))(x + y) = f(g(x) + g(y) + h(x) + h(y)) = f(g(x) + h(x)) + f(g(y) + h(y))$
+  - $M$ is $R$-module, so we got $phi: R -> endo_ZZ (M)$. $ker phi = ann(M)$: some $r in R$ s.t. $forall mu in M #h(1em) r mu = 0$: ideal.
+    - $R slash ann(M) tilde.eq im(phi) subset.eq^"subring" endo_ZZ (M)$
+    - Meaning we have another module: $M$ as $R slash ann(M)$-module
+    - $I subideal R$ then $I M submodule M$ is also a $R$-module
+      - In particular $I$ annihilates the quotient group $M slash (I M)$: it's a $R slash I$-module.
+- $D$ (integral) domain, then $deg(f(x) g(x)) = deg(f(x)) + deg(g(x))$ always work, thereby $D[x]$ domain
+  - Polynomial ring $g(x) = sum_(i=0)^m b_i x^i ==> b_m^k f(x) = g(x)q(x) + r(x)$
+  - (ch2.11, theorem 2.14, corollary 1) _remainder theorem_ there exists unique $q(x)$ s.t. $f(x) = (x-a)q(x) + f(a)$
+  - (ch2.11, theorem 2.14, corollary 2) _factor theorem_ $(x-a) | f(x) <==> f(a) = 0$
+  - Thereby $x_i in D[x_1, dots]$ is _irreducible_
+    - This is _false_ for $R[x_1, dots]$ whereby $R$ not integral domain: #link("https://math.stackexchange.com/questions/2302555")[$ (2x+3)(3x+2) = x in (ZZ slash 6 ZZ) [x] $]
+    - In fact, $x_i$ is irreducible in $R[x]$ _iff_ $R$ has no nontrivial #link("https://math.stackexchange.com/a/2305344/595630")[idempotent] elements i.e. where $r^2 = r in R$
+
 === Exercises
 
 - (2.1, ex.3, p.89) we don't really need abelian group for addition in rings
