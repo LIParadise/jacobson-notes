@@ -1,4 +1,9 @@
 #set text(size: 14pt, font: ((name: "Libertinus Serif", covers: "latin-in-cjk"), "Noto Serif CJK JP"))
+
+#show math.sum: math.limits
+#show math.product: math.limits
+#show math.integral: math.limits
+
 #import "@preview/commute:0.3.0": arr, commutative-diagram, node
 
 #let hl(content) = box(
@@ -12,6 +17,12 @@
     angle: 33deg,
   ),
 )
+
+#let aut = $op("Aut")$
+#let endo = $op("End")$
+#let ann = $op("Ann")$
+#let subideal = $subset.eq^"ideal"$
+#let submodule = $subset.eq^"module"$
 
 == Chapter 0 Introduction
 
@@ -119,8 +130,8 @@
   - Not necessarily the same class...?: Maybe type ${(i j)}$ mapped to ${(a b)(c d)}$
     - The type, i.e. disjoint cycle decomposition, contains only transpositions and singletons, for else the order would not be preserved
     - Note ${(1 r) | 1 <= r <= n}$ is generating set for $S_n$
-    - $(x y) tilde (i j)$ then $phi((x y)) tilde phi((i j))$, meaning there's some _fixed_ constant $k >= 1$ s.t. $phi((i j)) = limits(product)_(l = 1)^k tau_l$ in disjoint transposition decomposition
-    - LHS has $binom(n, n-1)$ while RHS has $(limits(product)_(l=0)^(k-1) binom(n-2l, 2)) (1/k!) = n! / (2^k k! (n-2k)!)$
+    - $(x y) tilde (i j)$ then $phi((x y)) tilde phi((i j))$, meaning there's some _fixed_ constant $k >= 1$ s.t. $phi((i j)) = product_(l = 1)^k tau_l$ in disjoint transposition decomposition
+    - LHS has $binom(n, n-1)$ while RHS has $(product_(l=0)^(k-1) binom(n-2l, 2)) (1/k!) = n! / (2^k k! (n-2k)!)$
     - $2^(k-1) = (n-2)! / (k! (n-2k)!)$, $k=1$ ok, $n > 2k >= 6$ then RHS some multiple of $binom(n-2, k)$ so the prime factorization mismatch
 
 === Exercises
@@ -169,7 +180,7 @@
   - closed!
   - In particular $R != 0$ i.e. $1_R != 0_R$ and $a != 0 and b != 0 => a b != 0$
   - Iff no nonzero zero divisors
-  - Iff $R != 0$ and _restrict cancellation_ works on both side
+  - Iff both $R != 0$ _and_ *restrict cancellation* works on both side
     - $a != 0$ then $(b a = c a => b = c) and (a b = a c => a = c)$
 - (2.2, p.91) _skew field_, _sfield_, _division ring_ if $(R^*, times, 1)$ is subgroup of the multiplicative monoid
   - Iff $1 != 0 and (forall a != 0 exists b quad a b = b a = 1)$
@@ -180,13 +191,13 @@
   - Do not commute: $e_(i j) e_(k l) = delta_(j k) e_(i l)$: Kronecker delta
   - ${e_(i i)}$ are idempotent
   - They are _not_ units in $M_n (R)$: consider $I = mat(1, 0, 0; 0, 1, 0; 0, 0, 1)$
-  - They span $M_n (R)$: $A = mat(a_(1 1), a_(1 2), dots, a_(1 n); a_(2 1), a_(2 2), dots, a_(2 n); dots; a_(n 1), , dots, a_(n 1)) = limits(sum)_(i j) a_(i j) e_(i j)$
+  - They span $M_n (R)$: $A = mat(a_(1 1), a_(1 2), dots, a_(1 n); a_(2 1), a_(2 2), dots, a_(2 n); dots; a_(n 1), , dots, a_(n 1)) = sum_(i j) a_(i j) e_(i j)$
 - (2.3, p.95) Identify $a in R$ in $M_n (R)$ by $op("diag") { a, a, dots, a }$
   - $a I = I a = op("diag"){a, a, dots, a} subset.eq C_(M_n (R))({e_(i j)})$ as subring (exercise 6)
   - $R -> {op("diag"){a, a, dots, a} | a in R} subset.eq M_n (R)$ isomorphism of rings: _embedding_ of $R$ in $M_n (R)$
-- (2.3, p.95) For *commutative ring* we have _determinant_: \ $det A = limits(sum)_sigma (op("sgn") sigma) a_(1 sigma(1)) a_(2 sigma(2)) a_(2 sigma(2)) dots a_(n sigma(n)) \ = limits(sum)_(k=1)^n a_(r k) A_(r k) \ = limits(sum)_(k=1)^n a_(k c) A_(k c)$: _cofactor expansion_
+- (2.3, p.95) For *commutative ring* we have _determinant_: \ $det A = sum_sigma (op("sgn") sigma) a_(1 sigma(1)) a_(2 sigma(2)) a_(2 sigma(2)) dots a_(n sigma(n)) \ = sum_(k=1)^n a_(r k) A_(r k) \ = sum_(k=1)^n a_(k c) A_(k c)$: _cofactor expansion_
   - $A_(r c)$ is _cofactor at row $r$ column $c$_ given by $(-1)^(r + c) det (A "sans column" c "and row" r)$
-  - Cofactor expansion using different rows/columns vanishes: $limits(sum)_k a_(x k) A_(x^prime k) = limits(sum)_k a_(k x) A_(k x^prime) = 0$ if $x eq.not x^prime$
+  - Cofactor expansion using different rows/columns vanishes: $sum_k a_(x k) A_(x^prime k) = sum_k a_(k x) A_(k x^prime) = 0$ if $x eq.not x^prime$
   - Writing $(op("adj") A) times A = A times (op("adj") A) = det A$ (recognize $R$ in $M_n (R)$ so $op("diag"){a, a, dots, a}$), define _adjoint_ $op("adj") A := (alpha_(i j))^T$ s.t. $(op("adj") A)_(r c) = alpha_(c r) = (-1)^(c+r) det (A "sans column" r "and row" c)$: here we use $alpha_(i j)$ for cofactor at row $i$ col $j$
     - Note the transpose required for cofactor expansion is along rows/columns
   - $det (A B) = det A dot det B$ and $det I = 1$ implies $det: M_n (R) -> R$ homomorphism, whereby the codomain is the multiplicative monoid of ring $R$
@@ -204,9 +215,9 @@
     - Specifically $i = mat(sqrt(-1), 0; 0, -sqrt(-1)) and j = mat(0, 1; -1, 0) and k = mat(0, sqrt(-1); sqrt(-1), 0)$
 - (2.5, p.101) congruence for rings are s.t. it's congruence for both the abelian $+$ and the monoid $times$ i.e. $a equiv alpha and b equiv beta => a + b equiv alpha + beta and a b equiv alpha beta$
   - (congruence for both the additive abelian group and multiplicative monoid) iff (subgroup in additive abelian group and multiplication is absorbing), motivating the definition of _ideal_: subgroup to the additive group that is absorbing in both sides when multiplied
-  - ideals are closed under intersection, thus define ideal _generated by_ some set $S$, denoted as $(S)$. We have $(S) = limits(sum)_(sigma in S) (limits(sum)_({ alpha, beta } subset.eq R) alpha sigma beta)$ (all summations are assumed to be of finite length)
+  - ideals are closed under intersection, thus define ideal _generated by_ some set $S$, denoted as $(S)$. We have $(S) = sum_(sigma in S) (sum_({ alpha, beta } subset.eq R) alpha sigma beta)$ (all summations are assumed to be of finite length)
     - _principal_ ideal if $I = (sigma in S)$ i.e. generated by one
-  - If $R$ is commutative, \ $(S) = (sigma_1, sigma_2, ..., sigma_n) = limits(sum)_(1 <= i <= n and r_i in R) r_i sigma_i = limits(sum)_(1 <= i <= n and r_i in R) sigma_i r_i$
+  - If $R$ is commutative, \ $(S) = (sigma_1, sigma_2, ..., sigma_n) = sum_(1 <= i <= n and r_i in R) r_i sigma_i = sum_(1 <= i <= n and r_i in R) sigma_i r_i$
     - Commutative ring so _principal_ $(a)$ becomes simply ${a gamma = gamma a | gamma in R}$
 - (2.5, p.101) quotient rings i.e. difference rings with respect to the ideal $I$
 - (2.5, p.102) $R$ commutative ring, then field iff ideals are trivial, ${0}$ and $R$
@@ -232,10 +243,10 @@
     ) #link(<universal-property>)[commutes]
   - (Theorem 2.6) *TODO* (rings/ideals in $R slash ker(phi)$ has bijection and associated isomorphism to some subrings/ideals of $R$ containing $ker(phi)$)
 - (2.7, p.109) _prime ring of $R$_ (modern notation *prime subring of $R$*): the smallest subring containing $1_R$ i.e. the subring generated by $1_R$
-  - $phi: ZZ -> R$ given by $n mapsto n 1_R := limits(sum)_(i=1)^n 1_R$; image being subring, contained in any other subring that contains $1_R$, thus the smallest: prime subring in $R$
+  - $phi: ZZ -> R$ given by $n mapsto n 1_R := sum_(i=1)^n 1_R$; image being subring, contained in any other subring that contains $1_R$, thus the smallest: prime subring in $R$
   - $im phi tilde.eq ZZ 1_R$ meaning $ker phi$ ideal in $ZZ$, meaning $ker phi = {0} or (k)$, the latter dubbed as _ring of residues modulo $k$_
   - Ring $R$ has prime subring being isomorphic to either $ZZ tilde.eq ZZ slash (0)$ or $ZZ slash (k)$. Define *characteristic*, $op("char") R$, to be $0$ for the former and $k$ for the latter.
-    - $op("char") R = k > 0$ then $k a := limits(sum)_(i=1)^k a =^"distro" (limits(sum)_(i=1)^k 1_R) a = 0_R a = 0$ \ i.e. $forall gamma in R, thick k gamma = 0$
+    - $op("char") R = k > 0$ then $k a := sum_(i=1)^k a =^"distro" (sum_(i=1)^k 1_R) a = 0_R a = 0$ \ i.e. $forall gamma in R, thick k gamma = 0$
     - $R$ domain, then its prime subring is either $ZZ$ or $ZZ slash (p)$ whereby $p$ prime
 - (2.8, p.112) $phi: R -> R^prime$ is _anti-isomorphism_ if it's isomorphism on the additive abelian group satisfying $phi(a b) = phi(b) phi(a) and phi(1_R) = 1_(R^prime)$, in which case $R$ and $R^prime$ are _anti-isomorphic_
   - For any $R$ ring we can construct $R^circle.small$, dubbed _$R$ opposite_, s.t. they are anti-isomorphic
@@ -246,15 +257,15 @@
 - (2.10, p.120) Towards the end of chapter 2, except 2.17 and explicitly mentioned otherwise, by default rings are commutative
 - (2.10, p.120) Given (commutative) $R$ subring to $R^prime$ ($R^prime$ _overring_ to $R$ (p.123)), *adjoining* $U subset.eq R^prime$ some subset of $R^prime$ to $R$ is denoting the subring *generated* by subring $R$ and subset $U$, denoted as $R[U]$.
   - $R[U][V] = R[U union V]$
-  - WLOG consider $R[{u}]$ abbreviated/abused as $R[u]$, which contained in (thus equal) ${limits(sum)_(i=0)^n r_i u^i | n < infinity and r_i in R}$: note the finiteness.
+  - WLOG consider $R[{u}]$ abbreviated/abused as $R[u]$, which contained in (thus equal) ${sum_(i=0)^n r_i u^i | n < infinity and r_i in R}$: note the finiteness.
     - See also #link(<2.7-ex.8>)[2.7 exercise 8 (p.110)].
-  - It might well be that ${a_i | 0 <= i <= k} != {b_i | 0 <= j <= l}$ with $limits(sum)_(i=0)^k a_i u^i = limits(sum)_(j=0)^l b_j u^j$: alternative names for the same element
+  - It might well be that ${a_i | 0 <= i <= k} != {b_i | 0 <= j <= l}$ with $sum_(i=0)^k a_i u^i = sum_(j=0)^l b_j u^j$: alternative names for the same element
     - $R = RR subset.eq R^prime = CC$ and $u = sqrt(-1)$: $1 = u^2$
     - $u in R$ then $(a_0 = u) = (a_0 = 0 and a_1 = 1)$
 - (2.10, p.121) We'd like a ring whereby comparing "coefficients" asserts equality. Consider the set of maps $NN -> R$ with *finite* support i.e. those maps to $0_R$ for all but finitely many elements.
   - ${(r_0, r_1, r_2, dots) | "all but finitely many" r_i != 0}$
     - Addition: pointwise
-    - Multiplication: ${a_i} times {b_j} = {c_k}$ where $c_k = limits(sum)_(i+j=k) a_i b_j$
+    - Multiplication: ${a_i} times {b_j} = {c_k}$ where $c_k = sum_(i+j=k) a_i b_j$
       - nowdays aka convolution
     - $(1, 0, 0, dots)$ is the multiplicative identity
     - $(0, 0, 0, dots)$ is the additive identity
