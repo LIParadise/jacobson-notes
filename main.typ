@@ -28,6 +28,7 @@
 #let ann = $op("Ann")$
 #let subideal = $subset.eq^"ideal"$
 #let submodule = $subset.eq^"module"$
+#let subring = $subset.eq^"subring"$
 #let inj = $arrow.r.hook$
 #let surj = $arrow.r.twohead$
 #let iso = $arrow.r.tilde$
