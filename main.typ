@@ -334,6 +334,13 @@
     - Then $A tilde.eq R[x_1, dots, x_r]$: the unique homomorphism s.t. $x_i mapsto^phi a_i$ and $a_i mapsto^psi x_i$, when composed, has to be _the_ identity mapping on resp. rings, that is, $psi compose phi = id_(R[x_j])$ and $phi compose psi = id_A$: note we can also think of resp. identity isomorphism as some unique extension by universal property, too.
       - $iota: R inj A$ must thus be injective
 - (2.10, p.123, p.124) Corollary: $R[u] tilde.eq quo(R[x] / I)$
+- (2.10, p.123, p.124) Refer to the homomorphism via #link(<ch-2.10-thm-2.10>)[universal property] $R[x] -> R[u]$ _substituting $u$ for $x$_. Then $u in S$ is...
+  - _transcendental_ if $R[x] -> R[u]$ injective
+  - _algebraic_ if otherwise
+  - Classical case: $QQ[u] subring RR subring CC$.
+- (2.10, p.124) $R subset.eq S$ and ${u_1, dots, u_r} subset.eq S$, then ${u_i}$ is _algebraically independent over $R$_ if the only finite sum of products $sum_(i in I and abs(I) < infinity) (a_i product_(j=1)^r u_j^(e_(i j)) ) = 0_S$ is for all the coefficients to be $0_S$.
+  - Another characterization for $R[x_1, dots, x_r]$ as an extension of $R$!
+    - (me) check: it satisfies the #link(<ch-2.10-thm-2.11>)[polynomial ring universal property] since the independence ensure the straightforward extension being well-defined
 - (2.11, p.128, p.129) theorem 2.13: if $D$ is commutative integral domain, then $D[x_1, x_2, dots, x_k]$ is commutative integral domain too, of which units are those in $D$
   - $deg(f(x) g(x)) = deg(f(x)) + deg(g(x))$ works even for $deg(0) = -infinity$ for there's no nonzero zero-divisor
   - $
