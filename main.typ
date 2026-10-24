@@ -17,33 +17,40 @@
     angle: 33deg,
   ),
 )
+#let quo(expr) = {
+  set math.frac(style: "skewed")
+  expr
+}
 
 #let aut = $op("Aut")$
 #let endo = $op("End")$
 #let ann = $op("Ann")$
 #let subideal = $subset.eq^"ideal"$
 #let submodule = $subset.eq^"module"$
+#let inj = $arrow.r.hook$
+#let surj = $arrow.r.twohead$
+#let iso = $arrow.r.tilde$
 
 == Chapter 0 Introduction
 
 - (0.2, p.7) set $S$, map $phi: S -> S$, then $phi$ is a _transformation_ on $S$
-- (0.3, p.12) $E$ equivalence relation, $iota: S -> S slash E$ defined by $a mapsto overline(a)$ is called the *natural map* of $S$ to the quotient set $S slash E$
+- (0.3, p.12) $E$ equivalence relation, $iota: S -> quo(S / E)$ defined by $a mapsto overline(a)$ is called the *natural map* of $S$ to the quotient set $quo(S / E)$
   - (0.3, p.12) $alpha: S -> S^prime$ then _inverse image_ is $alpha^(-1) (sigma^prime) = {sigma in S | alpha(sigma) = sigma^prime}$ and $alpha^(-1) (T^prime) = {sigma in S | alpha(sigma) in T^prime subset.eq S^prime }$, which may be empty if $sigma^prime in.not im alpha$
-    - _fiber over element $sigma^prime in im alpha$_ is $lr((alpha^(-1) (sigma^prime in im alpha))) != nothing$, so the set of the fibers is exactly $S slash E_alpha$
-  - (0.3, p.13) $overline(alpha): S slash E_alpha -> S^prime$ given by $overline(alpha) (overline(sigma)) = alpha(sigma)$, the map of $S slash E_alpha$ *induced by* $alpha$, is a well-defined _injective_ map
+    - _fiber over element $sigma^prime in im alpha$_ is $lr((alpha^(-1) (sigma^prime in im alpha))) != nothing$, so the set of the fibers is exactly $quo(S / E_alpha)$
+  - (0.3, p.13) $overline(alpha): quo(S / E_alpha) -> S^prime$ given by $overline(alpha) (overline(sigma)) = alpha(sigma)$, the map of $quo(S / E_alpha)$ *induced by* $alpha$, is a well-defined _injective_ map
     - $overline(alpha)$ bijective iff $alpha$ surjective
-  - If $alpha$ injection, we say $S slash E_alpha$ can be identified with $S$ and $overline(alpha)$ can be regarded as the same as $alpha$
+  - If $alpha$ injection, we say $quo(S / E_alpha)$ can be identified with $S$ and $overline(alpha)$ can be regarded as the same as $alpha$
   - #commutative-diagram(
       node((0, 0), $S$, "domain"),
       node((0, 1), $S^prime$, "codomain"),
-      node((1, 0), $S slash E_alpha$, "quotient"),
+      node((1, 0), $quo(S / E_alpha)$, "quotient"),
 
       arr("domain", "quotient", $iota$, "surj"),
       arr("domain", "codomain", $alpha$),
       arr("quotient", "codomain", $exists ! overline(alpha)$, "dashed"),
-    ) $alpha = overline(alpha) compose iota$, the *factorization* of the given map $alpha$ as a product of the *natural surjective map* $iota: S -> S^prime$ and the *induced* map $overline(alpha): S slash E_alpha -> S^prime$: $iota$ _surjective_ and $overline(alpha)$ _injective_, i.e. the diagram commutes
-  - Universal property: $overline(alpha)$ is the unique map that makes the diagram commute, for if $beta: S slash E_alpha -> S^prime$ satisfies $beta compose iota = alpha$, then $beta(overline(sigma)) = beta(iota(sigma)) = alpha(sigma)$ which is exactly how we define $overline(alpha)$
-- Universal property: <universal-property> $alpha: S -> S^prime$ is *compatible with* equivalence relation $E$ on $S$ if $sigma E tau ==> alpha(sigma) = alpha(tau)$, $iota: S -> S slash E$ given by $sigma mapsto overline(sigma)$ the *natural surjection*, then there exists unique *induced* map $overline(alpha): S slash E -> S^prime$ s.t. $overline(alpha) compose iota = alpha$
+    ) $alpha = overline(alpha) compose iota$, the *factorization* of the given map $alpha$ as a product of the *natural surjective map* $iota: S -> S^prime$ and the *induced* map $overline(alpha): quo(S / E_alpha) -> S^prime$: $iota$ _surjective_ and $overline(alpha)$ _injective_, i.e. the diagram commutes
+  - Universal property: $overline(alpha)$ is the unique map that makes the diagram commute, for if $beta: quo(S / E_alpha) -> S^prime$ satisfies $beta compose iota = alpha$, then $beta(overline(sigma)) = beta(iota(sigma)) = alpha(sigma)$ which is exactly how we define $overline(alpha)$
+- Universal property: <universal-property> $alpha: S -> S^prime$ is *compatible with* equivalence relation $E$ on $S$ if $sigma E tau ==> alpha(sigma) = alpha(tau)$, $iota: S -> quo(S / E)$ given by $sigma mapsto overline(sigma)$ the *natural surjection*, then there exists unique *induced* map $overline(alpha): quo(S / E) -> S^prime$ s.t. $overline(alpha) compose iota = alpha$
   - the unique induced map $overline(alpha)$ is injective iff $E = E_alpha$.
 
 == Chapter 1
@@ -96,22 +103,22 @@
   - $op("End") M$ the endomorphisms of a monoid $M$ is a monoid of transformations of the monoid, the _endormorphism monoid of $M$_
 - (1.9, p.61) *_Fundamental Theorem of Homomorphisms of Monoids and Groups_*
   - homomorphism gives congruence relations by considering fibers
-  - Consider group. $L lt.closed.eq K = ker phi$ (so $phi$ is #link(<universal-property>)[compatible] with congruence defined by $L$), we have _induced homomorphism_ $overline(phi): a L mapsto phi(a)$, given by the _universal property_ satisfying $overline(phi) compose (a mapsto a L) = phi$. $ker overline(phi) = (ker phi) slash L = K slash L$ in particular $overline(phi)$ injective iff $K = L$.
+  - Consider group. $L lt.closed.eq K = ker phi$ (so $phi$ is #link(<universal-property>)[compatible] with congruence defined by $L$), we have _induced homomorphism_ $overline(phi): a L mapsto phi(a)$, given by the _universal property_ satisfying $overline(phi) compose (a mapsto a L) = phi$. $ker overline(phi) = quo((ker phi) / L) = quo(K / L)$ in particular $overline(phi)$ injective iff $K = L$.
   - $ker phi = {e} <==> phi "injective"$ is for group: the monoid of strings has homomorphism to $NN$ by length, which has trivial kernel (the empty string) but certainly not injective
   - $phi$ is equal to first epimorphism to quotient and then (exist unique) momomorphism (*induced map*) to codomain
   - #commutative-diagram(
       node((0, 0), $M$, "domain"),
       node((0, 1), $M^prime$, "codomain"),
-      node((1, 0), $M slash "ker"(f)$, "quotient"),
+      node((1, 0), $quo(M / ker(f))$, "quotient"),
 
       arr("domain", "quotient", $pi$, "surj"),
       arr("domain", "codomain", $phi$),
       arr("quotient", "codomain", $exists ! overline(phi)$, "dashed"),
     ) #link(<universal-property>)[commutes]
-  - Corollary: $phi: G -> G^prime$ group epimorphism, then induced map $overline(phi): G slash ker phi -> G^prime$ is both epimorphism and monomorphism, meaning isomorphism, i.e. $im phi tilde.eq G slash ker phi$
+  - Corollary: $phi: G -> G^prime$ group epimorphism, then induced map $overline(phi): quo(G / (ker phi)) -> G^prime$ is both epimorphism and monomorphism, meaning isomorphism, i.e. $im phi tilde.eq quo(G / (ker phi))$
 - (1.10, p.65) (Theorem 1.8) $eta: G -> G^prime$ epimorphism, then there's _bijection_ between the family of subgroups in $G$ in which $ker eta$ is contained, ${H subset.eq G | ker eta subset.eq H}$, and the family of _all_ subgroups in $G^prime$, given by $H mapsto eta(H)$.
   - $H lt.closed.eq G <==> eta(H) lt.closed.eq G^prime$
-    - Composed homomorphism $((G^prime -> G^prime slash eta(H)) compose eta)$ has kernel $ker((y^prime mapsto y^prime eta(H)) compose (x mapsto^eta x^prime)) = H$, meaning (universal property, factors through, induced map, injective since $ker (G -> G slash H) = H$ too, surjective by epimorphism premise) we have isomorphism $G slash H arrow.r.tilde G^prime slash eta(H)$ given by $g H mapsto eta(g) eta(H)$.
+    - Composed homomorphism $((G^prime -> quo(G^prime / eta(H))) compose eta)$ has kernel $ker((y^prime mapsto y^prime eta(H)) compose (x mapsto^eta x^prime)) = H$, meaning (universal property, factors through, induced map, injective since $ker (G -> quo(G / H)) = H$ too, surjective by epimorphism premise) we have isomorphism $quo(G / H) arrow.r.tilde quo(G^prime / eta(H))$ given by $g H mapsto eta(g) eta(H)$.
 
 === Generic Remarks
 
@@ -162,7 +169,7 @@
       0, 1, z;
       0, 0, 1;
       delim: "[",
-    ) in ZZ slash 3 ZZ_(3 times 3) $, the Heisenberg group
+    ) in quo(ZZ / 3 ZZ)_(3 times 3) $, the Heisenberg group
     - Note it's minimal example: by Cauchy and the fact we have no other prime orders other than $3$, the group is of size $3^n$, and $3$ is cyclic while $3^2$ is abelian.
       - That $p^2$ is abelian: consider acting on itself by conjugation: fixed points are $C_G(G) = Z_G$ and apply orbit-stabilizer theorem
 - (1.9, ex.4, p.63) Consider automorphism group of cyclic groups
@@ -230,24 +237,24 @@
   - $(7)^2 = (49) subset.neq (7)$
 - (2.7, p.106) *homomorphism for rings* is $phi: R -> R^prime$ s.t. it's both a homomorphism for the additive group and the multiplicative monoid
   - kernel for ring homomorphism: $ker phi := phi^(-1) (0_(R^prime))$ is defined to be the kernel of $phi$ as homomorphism on the additive group. Preimage, congruence for both the additive abelian group and the multiplicative monoid, ideal.
-  - $eta: R -> R^prime$, $I subset.eq ker eta$ ideal, $pi: R -> R slash I$ natural epimorphism, then $eta$ factors through $R slash I$ uniquely (#link(<universal-property>)[universal property]) with $overline(eta): overline(a) = a + I mapsto eta(a)$ s.t. $eta = overline(eta) compose pi$
+  - $eta: R -> R^prime$, $I subset.eq ker eta$ ideal, $pi: R -> quo(R / I)$ natural epimorphism, then $eta$ factors through $quo(R / I)$ uniquely (#link(<universal-property>)[universal property]) with $overline(eta): overline(a) = a + I mapsto eta(a)$ s.t. $eta = overline(eta) compose pi$
   - $overline(eta)$ injective (thus monomorphism) iff $I = ker eta$
   - #commutative-diagram(
       node((0, 0), $R$, "domain"),
       node((0, 1), $R^prime$, "codomain"),
-      node((1, 0), $R slash I$, "quotient"),
+      node((1, 0), $quo(R / I)$, "quotient"),
 
       arr("domain", "quotient", $pi$, "surj"),
       arr("domain", "codomain", $eta$),
       arr("quotient", "codomain", $exists ! overline(eta)$, "dashed"),
     ) #link(<universal-property>)[commutes]
-  - (Theorem 2.6) *TODO* (rings/ideals in $R slash ker(phi)$ has bijection and associated isomorphism to some subrings/ideals of $R$ containing $ker(phi)$)
+  - (Theorem 2.6) *TODO* (rings/ideals in $quo(R / ker(phi))$ has bijection and associated isomorphism to some subrings/ideals of $R$ containing $ker(phi)$)
 - (2.7, p.109) _prime ring of $R$_ (modern notation *prime subring of $R$*): the smallest subring containing $1_R$ i.e. the subring generated by $1_R$
   - $phi: ZZ -> R$ given by $n mapsto n 1_R := sum_(i=1)^n 1_R$; image being subring, contained in any other subring that contains $1_R$, thus the smallest: prime subring in $R$
   - $im phi tilde.eq ZZ 1_R$ meaning $ker phi$ ideal in $ZZ$, meaning $ker phi = {0} or (k)$, the latter dubbed as _ring of residues modulo $k$_
-  - Ring $R$ has prime subring being isomorphic to either $ZZ tilde.eq ZZ slash (0)$ or $ZZ slash (k)$. Define *characteristic*, $op("char") R$, to be $0$ for the former and $k$ for the latter.
+  - Ring $R$ has prime subring being isomorphic to either $ZZ tilde.eq quo(ZZ / (0))$ or $quo(ZZ / (k))$. Define *characteristic*, $op("char") R$, to be $0$ for the former and $k$ for the latter.
     - $op("char") R = k > 0$ then $k a := sum_(i=1)^k a =^"distro" (sum_(i=1)^k 1_R) a = 0_R a = 0$ \ i.e. $forall gamma in R, thick k gamma = 0$
-    - $R$ domain, then its prime subring is either $ZZ$ or $ZZ slash (p)$ whereby $p$ prime
+    - $R$ domain, then its prime subring is either $ZZ$ or $quo(ZZ / (p))$ whereby $p$ prime
 - (2.8, p.112) $phi: R -> R^prime$ is _anti-isomorphism_ if it's isomorphism on the additive abelian group satisfying $phi(a b) = phi(b) phi(a) and phi(1_R) = 1_(R^prime)$, in which case $R$ and $R^prime$ are _anti-isomorphic_
   - For any $R$ ring we can construct $R^circle.small$, dubbed _$R$ opposite_, s.t. they are anti-isomorphic
   - _anti-automorphism_ if $phi: R -> R$, _involution_ if $phi compose phi = id$
@@ -285,9 +292,9 @@
       arr("domain", "codomain", $eta$),
       arr("polynomial ring", "codomain", $exists ! tilde(eta)$, "dashed"),
     )
-- (2.10, p.121) theorem 2.10: <ch-2.10-thm-2.10> $R subset.eq S$ commutative rings, $sigma in S$, identity homomorphism $nu: R -> S$, then exists unique homomorphism $tilde(nu): R[x] -> S$ that's both extention of $nu$ and s.t. $x$ got mapped to $u$. Meaning $ R[x] slash ker(tilde(nu)) tilde.eq im(tilde(nu)) = R[u] and ker(tilde(nu)) inter R = {0} $
-- (2.10, p.122) Conversely if $I subset.eq^"ideal" R[x] and R inter I = {0}$, via the natural homomorphism $eta: R[x] -> R[x] slash I$, $eta$ restricted on $R$ is monomorphism so we may identify $R$ with $eta(R) subset.eq^"subring" R[x] slash I$. Letting $u = x + I in R[x] slash I$, since $R[x]$ is generated by $R$ and ${x}$, $eta(R[x]) = R[x] slash I$ is generated by $eta(R)$ and $eta(u)$. I.e. $R[x] slash I arrow.r.tilde R[u]$
-  - where again RHS is via the identification of $R$ in $R[x] slash I$ via $eta(R)$.
+- (2.10, p.121) theorem 2.10: <ch-2.10-thm-2.10> $R subset.eq S$ commutative rings, $sigma in S$, identity homomorphism $nu: R -> S$, then exists unique homomorphism $tilde(nu): R[x] -> S$ that's both extention of $nu$ and s.t. $x$ got mapped to $u$. Meaning $ quo(R[x] / ker(tilde(nu))) tilde.eq im(tilde(nu)) = R[u] and ker(tilde(nu)) inter R = {0} $
+- (2.10, p.122) Conversely if $I subset.eq^"ideal" R[x] and R inter I = {0}$, via the natural homomorphism $eta: R[x] -> quo(R[x] / I)$, $eta$ restricted on $R$ is monomorphism so we may identify $R$ with $eta(R) subset.eq^"subring" quo(R[x] / I)$. Letting $u = x + I in quo(R[x] / I)$, since $R[x]$ is generated by $R$ and ${x}$, $eta(R[x]) = quo(R[x] / I)$ is generated by $eta(R)$ and $eta(u)$. I.e. $quo(R[x] / I) iso R[u]$
+  - where again RHS is via the identification of $R$ in $quo(R[x] / I)$ via $eta(R)$.
 - (2.10, p.124) theorem 2.11: <ch-2.10-thm-2.11> _*the* ring of polynomials over $R$ in $r$ indeterminates $x_1, dots, x_r$_, i.e. $R[x_1, dots, x_r]$, satisfies the following #link(<universal-property>)[_universal property_]: #hl("Note") we have a (natural) monomorphism $R -> R[x_1, dots, x_r]$. For _any_ $S$ ring, _any_ $eta: R -> S$ homomorphism, and _any_ $nu: {1,dots, r} -> {u_1, dots, u_r} subset.eq S$, there _exists unique_ extension of $eta$ to $tilde(eta): R[x_1, dots, x_r] -> S$ with $ forall 1 <= i <= r #h(1em) tilde(eta)(x_i) = nu(i) = u_i $
   - #hl("so we need to fix some monomorphism first?") I.e. it's the tuples $(A, iota_alpha: R -> A)$ and $(R[x_1, dots, x_r], iota_gamma: R -> R[x_1, dots, x_r])$ that we talk about if they satiesfy the universal property
   - Proof: Jacobson defines $R[x_1, dots, x_r]$ inductively, thus it suffices to inductively apply #link(<ch-2.10-thm-2.10>)[theorem 2.10].
@@ -316,13 +323,15 @@
     - Meaning $phi compose psi = id$. The unique $phi$ is isomorphism: $A arrow.tilde^phi R[x_1, dots, x_r]$.
   - In my own words...
     - Suppose we have...
-      - $iota: R arrow.r.hook A$ monomorphism
+      - $iota: R inj A$ monomorphism
       - ${a_1, dots, a_r} subset.eq A$ some _distinguished distinct_ elements $a_i in.not im(iota)$.
-      - $A = im(iota)[a_1, dots, a_r]$
+      - $A = im(iota)[a_1, dots, a_r]$ i.e. generated by the image and the distinguished elements
     - _If_ additionally $A$ satiesfies the universal property, that for any $eta: R -> S$ homomorphism, for any $nu: {1, dots, r} -> {sigma_1, dots, sigma_r} subset.eq S$, there _exists unique_ $tilde(eta): A -> S$ that's both...
       - an extension of $eta$, i.e. $tilde(eta) compose iota = eta$
       - $tilde(eta)(a_i) = nu(i) = sigma_i$
-    - Then $A tilde.eq R[x_1, dots, x_r]$
+    - Then $A tilde.eq R[x_1, dots, x_r]$: the unique homomorphism s.t. $x_i mapsto^phi a_i$ and $a_i mapsto^psi x_i$, when composed, has to be _the_ identity mapping on resp. rings, that is, $psi compose phi = id_(R[x_j])$ and $phi compose psi = id_A$: note we can also think of resp. identity isomorphism as some unique extension by universal property, too.
+      - $iota: R inj A$ must thus be injective
+- (2.10, p.123, p.124) Corollary: $R[u] tilde.eq quo(R[x] / I)$
 - (2.11, p.128, p.129) theorem 2.13: if $D$ is commutative integral domain, then $D[x_1, x_2, dots, x_k]$ is commutative integral domain too, of which units are those in $D$
   - $deg(f(x) g(x)) = deg(f(x)) + deg(g(x))$ works even for $deg(0) = -infinity$ for there's no nonzero zero-divisor
   - $
@@ -357,16 +366,16 @@
     - $(f compose (g+h))(x) + (f compose (g+h))(y) = f(g(x) + h(x)) + f(g(y) + h(y))$
     - $(f compose (g+h))(x + y) = f(g(x) + g(y) + h(x) + h(y)) = f(g(x) + h(x)) + f(g(y) + h(y))$
   - $M$ is $R$-module, so we got $phi: R -> endo_ZZ (M)$. $ker phi = ann(M)$: some $r in R$ s.t. $forall mu in M #h(1em) r mu = 0$: ideal.
-    - $R slash ann(M) tilde.eq im(phi) subset.eq^"subring" endo_ZZ (M)$
-    - Meaning we have another module: $M$ as $R slash ann(M)$-module
+    - $quo(R / ann(M)) tilde.eq im(phi) subset.eq^"subring" endo_ZZ (M)$
+    - Meaning we have another module: $M$ as $quo(R / ann(M))$-module
     - $I subideal R$ then $I M submodule M$ is also a $R$-module
-      - In particular $I$ annihilates the quotient group $M slash (I M)$: it's a $R slash I$-module.
+      - In particular $I$ annihilates the quotient group $quo(M / (I M))$: it's a $quo(R / I)$-module.
 - $D$ (integral) domain, then $deg(f(x) g(x)) = deg(f(x)) + deg(g(x))$ always work, thereby $D[x]$ domain
   - Polynomial ring $g(x) = sum_(i=0)^m b_i x^i ==> b_m^k f(x) = g(x)q(x) + r(x)$
   - (ch2.11, theorem 2.14, corollary 1) _remainder theorem_ there exists unique $q(x)$ s.t. $f(x) = (x-a)q(x) + f(a)$
   - (ch2.11, theorem 2.14, corollary 2) _factor theorem_ $(x-a) | f(x) <==> f(a) = 0$
   - Thereby $x_i in D[x_1, dots]$ is _irreducible_
-    - This is _false_ for $R[x_1, dots]$ whereby $R$ not integral domain: #link("https://math.stackexchange.com/questions/2302555")[$ (2x+3)(3x+2) = x in (ZZ slash 6 ZZ) [x] $]
+    - This is _false_ for $R[x_1, dots]$ whereby $R$ not integral domain: #link("https://math.stackexchange.com/questions/2302555")[$ (2x+3)(3x+2) = x in (quo(ZZ / 6 ZZ)) [x] $]
     - In fact, $x_i$ is irreducible in $R[x]$ _iff_ $R$ has no nontrivial #link("https://math.stackexchange.com/a/2305344/595630")[idempotent] elements i.e. where $r^2 = r in R$
 
 === Exercises
@@ -405,7 +414,7 @@
 
 - Maximal ideal of $QQ$? Like $({2^k/p | p != 2 and k >= 1})$?
   - Ideal containing identity is whole ring so $({1/p | p != 2})$ generates the whole ring $QQ$
-  - What does $QQ slash ({2^k/p | p != 2 and k >= 1})$ look like?
+  - What does $quo(QQ / ({2^k/p | p != 2 and k >= 1}))$ look like?
   - $QQ$ is not (field generated by finite elements) by virtue of lowest common multiple of the denominators
   - nvm it cannot be ideal for $1/2 times 2/3 = 1/3$ and with $1/3$ the generated ideal contains $1$
   - nah nvm $QQ$ is field so ideal contain only units so they are trivial
