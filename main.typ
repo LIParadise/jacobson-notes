@@ -37,24 +37,24 @@
 == Chapter 0 Introduction
 
 - (0.2, p.7) set $S$, map $phi: S -> S$, then $phi$ is a _transformation_ on $S$
-- (0.3, p.12) $E$ equivalence relation, $iota: S -> quo(S / E)$ defined by $a mapsto overline(a)$ is called the *natural map* of $S$ to the quotient set $quo(S / E)$
-  - (0.3, p.12) $alpha: S -> S^prime$ then _inverse image_ is $alpha^(-1) (sigma^prime) = {sigma in S | alpha(sigma) = sigma^prime}$ and $alpha^(-1) (T^prime) = {sigma in S | alpha(sigma) in T^prime subset.eq S^prime }$, which may be empty if $sigma^prime in.not im alpha$
-    - _fiber over element $sigma^prime in im alpha$_ is $lr((alpha^(-1) (sigma^prime in im alpha))) != nothing$, so the set of the fibers is exactly $quo(S / E_alpha)$
-  - (0.3, p.13) $overline(alpha): quo(S / E_alpha) -> S^prime$ given by $overline(alpha) (overline(sigma)) = alpha(sigma)$, the map of $quo(S / E_alpha)$ *induced by* $alpha$, is a well-defined _injective_ map
+- (0.3, p.12) $scr(E)$ equivalence relation, $iota: S -> quo(S / scr(E))$ defined by $a mapsto overline(a)$ is called the *natural map* of $S$ to the quotient set $quo(S / scr(E))$
+  - (0.3, p.12) $alpha: S -> S^prime$ then _inverse image_ is $alpha^(-1) (sigma^prime) := {sigma in S | alpha(sigma) = sigma^prime}$ and $alpha^(-1) (T^prime) := {sigma in S | alpha(sigma) in T^prime subset.eq S^prime }$, which may be empty if $sigma^prime in.not im alpha$
+    - _fiber over element $sigma^prime in im alpha$_ is $lr((alpha^(-1) (sigma^prime in im alpha))) != nothing$, so the set of the fibers is exactly $quo(S / scr(E)_alpha)$
+  - (0.3, p.13) $overline(alpha): quo(S / scr(E)_alpha) -> S^prime$ given by $overline(alpha) (overline(sigma)) = alpha(sigma)$, the map of $quo(S / scr(E)_alpha)$ *induced by* $alpha$, is a well-defined _injective_ map
     - $overline(alpha)$ bijective iff $alpha$ surjective
-  - If $alpha$ injection, we say $quo(S / E_alpha)$ can be identified with $S$ and $overline(alpha)$ can be regarded as the same as $alpha$
+  - If $alpha$ injection, we say $quo(S / scr(E)_alpha)$ can be identified with $S$ and $overline(alpha)$ can be regarded as the same as $alpha$
   - #commutative-diagram(
       node((0, 0), $S$, "domain"),
       node((0, 1), $S^prime$, "codomain"),
-      node((1, 0), $quo(S / E_alpha)$, "quotient"),
+      node((1, 0), $quo(S / scr(E)_alpha)$, "quotient"),
 
       arr("domain", "quotient", $iota$, "surj"),
       arr("domain", "codomain", $alpha$),
       arr("quotient", "codomain", $exists ! overline(alpha)$, "dashed"),
-    ) $alpha = overline(alpha) compose iota$, the *factorization* of the given map $alpha$ as a product of the *natural surjective map* $iota: S -> S^prime$ and the *induced* map $overline(alpha): quo(S / E_alpha) -> S^prime$: $iota$ _surjective_ and $overline(alpha)$ _injective_, i.e. the diagram commutes
-  - Universal property: $overline(alpha)$ is the unique map that makes the diagram commute, for if $beta: quo(S / E_alpha) -> S^prime$ satisfies $beta compose iota = alpha$, then $beta(overline(sigma)) = beta(iota(sigma)) = alpha(sigma)$ which is exactly how we define $overline(alpha)$
-- Universal property: <universal-property> $alpha: S -> S^prime$ is *compatible with* equivalence relation $E$ on $S$ if $sigma E tau ==> alpha(sigma) = alpha(tau)$, $iota: S -> quo(S / E)$ given by $sigma mapsto overline(sigma)$ the *natural surjection*, then there exists unique *induced* map $overline(alpha): quo(S / E) -> S^prime$ s.t. $overline(alpha) compose iota = alpha$
-  - the unique induced map $overline(alpha)$ is injective iff $E = E_alpha$.
+    ) $alpha = overline(alpha) compose iota$, the *factorization* of the given map $alpha$ as a product of the *natural surjective map* $iota: S -> S^prime$ and the *induced* map $overline(alpha): quo(S / scr(E)_alpha) -> S^prime$: $iota$ _surjective_ and $overline(alpha)$ _injective_, i.e. the diagram commutes
+  - Universal property: $overline(alpha)$ is the unique map that makes the diagram commute, for if $beta: quo(S / scr(E)_alpha) -> S^prime$ satisfies $beta compose iota = alpha$, then $beta(overline(sigma)) = beta(iota(sigma)) = alpha(sigma)$ which is exactly how we define $overline(alpha)$
+- Universal property: <universal-property> $alpha: S -> S^prime$ is *compatible with* equivalence relation $scr(E)$ on $S$ if $sigma scr(E) tau ==> alpha(sigma) = alpha(tau)$, $iota: S -> quo(S / scr(E))$ given by $sigma mapsto overline(sigma)$ the _natural surjection_, then there *exists unique* _induced_ map $overline(alpha): quo(S / scr(E)) -> S^prime$ s.t. $overline(alpha) compose iota = alpha$
+  - the unique induced map $overline(alpha)$ is injective iff $scr(E) = scr(E)_alpha$.
 
 == Chapter 1
 
