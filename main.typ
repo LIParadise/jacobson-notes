@@ -3,6 +3,7 @@
 #show math.sum: math.limits
 #show math.product: math.limits
 #show math.integral: math.limits
+#show link: set text(fill: blue)
 
 #import "@preview/commute:0.3.0": arr, commutative-diagram, node
 
