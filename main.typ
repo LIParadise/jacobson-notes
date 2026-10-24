@@ -430,3 +430,4 @@
     "It is clear that this property of the $x$s gives another characterization of the ring $R[x_1, x_2, dots, x_r]$ as an extension of $R$",
   )
   - WTF?
+- #link(<ch-2.10-thm-2.11>)[universal property for polynomial rings]: it's intriguing that we can pick whatever element to send our indeterminates to, and there _exists unique_ ring homomorphism that accompany such choice(s). Kinda remind me of the layman's terms in (homogeneous) differential equation $y^(prime prime) + 2y^prime + y = 0$ that you "wiggle" your way out via multiplying with your solution at hand by $x$.
