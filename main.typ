@@ -399,11 +399,43 @@
       - For any $k >= q$, via long division, $x_i^k = (x_i^q - x_i) q_k (x_i) + r_k (x_i)$, we can rewrite any $A in F[x_1, dots, x_r]$ as $ A = (sum_(i=1)^r (x_i^q-x_i)B_i (x_1, dots, x_r)) + B_0(x_1, dots, x_r) $ where $B_0$ has no $x_i$ with power greater than or equal to $q$
       - We have $psi(A) = 0_(F^r -> F) <==> psi(B_0) = 0_(F^r -> F)$
       - $ker(psi)$ is therefore identified to be the ideal $(x_1^q - x_1, dots, x_r^q - x_r)$.
+- (2.14, p.141) Assuming cancellative commutative monoid $M$
+  - _associates_: $a divides b and b divides a$, equivalently $a = mu b$ where $mu in M^times$ i.e. $mu$ unit
+    - $M^times subgroup M$ so being associates is equivalence relation
+  - $f divides a and a divides.not f$ then $f$ is _proper factor_ of $a$
+  - _irreducible_: <irreducible> $u$ s.t. there's no proper factor, i.e. factor iff associate
+    - In general there's no _unique up to associates and permutation_ factorization
+      - $ZZ[sqrt(-5)] in.rev 6 = 2 times 3 = (1+sqrt(-5)) times (1-sqrt(-5))$
+      - $ZZ[sqrt(-5)] in.rev 9 = 3 times 3 = (2+sqrt(-5)) times (2-sqrt(-5))$
+      - Generic Euclidean norm is multiplicative: the only units are ${plus.minus 1}$ and these are some irreducibles that are not associates
+  - _Unique factorization monoid_, _Gaussian_, or _factorial_: cancellative commutative monoid where exists unique up to associates factorization
+    - (repetition allowed) $a = product_(i=1)^alpha p_i$, $b = product_(i=1)^beta p^prime_i$, $c = product_(i=1)^gamma p^prime.double_i$, and $a = b c$, then by uniqueness there's injection $p^prime_j mapsto p_(i_j)$ i.e. any factor of $a$ is of the form $product_(j=1)^(k <= alpha) p_(i_j)$
 - (2.14, p.142) <ch-2.14-ufd-then-irreducibility-implies-primeness> $R$ UFD then irreducible implies primeness
   - $r$ irreducible and $r | a b$. WLOG assume neither $a$ nor $b$ is unit.
   - Consider unique factorization into irreducibles, $a = product_(i = 1)^(k < infinity) gamma_i and b = product_(j = 1)^(l < infinity) gamma^prime_j$ (repetition allowed)
   - By uniqueness, factors of $a b$ must be some subset (multiset) within ${gamma_i} union {gamma^prime_j}$.
   - $r$ is irreducible, so $r | a or r | b$
+- (2.14, p.142) _divisor chain condition_: there's no infinite sequence ${a_i}$ s.t. $a_(i+1)$ is proper factor of $a_i$
+- (2.14, p.142) _primeness condition_: irreducibility implies primeness
+- (2.14, p.143) UFD iff commutative cancellative monoid with divisor chain condition and primeness condition
+  - Irreducibility is #link(<irreducible>)[by definition] suitable base case for mathematical induction
+  - By induction (twice) we know irreducible decomposition exists
+  - Base case for uniqueness: suppose $a$ can be written as two products of irreducibles...
+    - $a = p = product_(i=1)^k p_i$. By irreducibility of $p$, $k = 1$.
+  - Inductive case: irreducible implies prime, $ p a divides c d ==> c d = p a b ==> p divides c d $ WLOG for $ a = product_(i=1)^s p_i = product_(i=1)^t p^prime_i $ we have $p_1 tilde p_1^prime$ associates and apply inductive hypothesis
+- (2.14, p.143) UFD iff commutative cancellative monoid with divisor chain condition and GCD condition
+  - $ gcd(a, b) := {u mid(|) u divides a and u divides b and forall mu #h(1em) mu divides a and mu divides b ==> mu divides u } $
+    - _relatively prime_: if $gcd$ is some unit
+      - In UFD, iff either is unit, or there's no shared irreducible factor
+  - $ lcm(a, b) := {m mid(|) a divides m and b divides m and forall mu #h(1em) a divides mu and b divides mu ==> m divides mu } $
+  - GCD condition: any finite subset of elements has $gcd$ defined
+  - UFD implies both $gcd$ and $lcm$: observe that by gathering associated terms we can rely on the exponents
+  - Commutative cancellative monoid and GCD condition implies that irreducibility leads to primeness
+    - $c(a, b) ~ (c a, c b)$
+      - just calculate
+    - $(a, b) ~ 1 and (a, c) ~ 1 ==> (a, b c) ~ 1$
+      - $1 ~ (a, c) ~ (a, (a c, b c)) ~ ((a, a c), b c) ~ (a, b c)$
+    - Contrapositive: suppose irreducible $p$, $p divides.not a and p divides.not b$, then $(p, a) ~ 1 and (p, b) ~ 1$ and so $(p, a b) ~ 1$ meaning $p divides.not a b$
 
 === Generic Remarks
 
