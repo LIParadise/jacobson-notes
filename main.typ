@@ -472,6 +472,10 @@
     - For the general case WLOG (by multiplying units) we assume $product_(i=1)^k d_i = product_(i=1)^(k^prime) d^prime_i = scr(c)(A(x))$ the _content_ of $A$
     - Thus the scalar part is clearly unique up to associates since $D$ UFD premise. Then we're back to $A$ primitive case.
     - In short, factor into irreducibles, take the _content_ $scr(c)(A(x))$ out, then since irreducibility is maintained in $F[x]$ the polynomial ring by field of fractions the $deg > 0$ part is resolved by the fact PID implies UFD
+- (2.16, p.154) $D$ UFD, $A(x) in D[x]$ monic, then any monic factor of $A(x)$ in $F[x]$ is contained in $D[x]$
+  - Proof: consider monic irreducible factorization of $A(x)$
+  - $D[x]$ UFD and irreducibility is #link(<field-of-fractions-preserve-irreducibility>)[inherited], these factors are also _the_ factors $F[x]$
+  - Off by units is fine but the monic constraint brings us back to the ones we obtained earlier in $D[x]$
 
 === Generic Remarks
 
