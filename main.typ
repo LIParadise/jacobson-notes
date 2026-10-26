@@ -1,4 +1,4 @@
-#set text(size: 14pt, font: ((name: "Libertinus Serif", covers: "latin-in-cjk"), "Noto Serif CJK JP"))
+#set text(size: 13pt, font: ((name: "Libertinus Serif", covers: "latin-in-cjk"), "Noto Serif CJK JP"))
 
 #show math.sum: math.limits
 #show math.product: math.limits
@@ -448,6 +448,30 @@
     - $(a, b) ~ 1 and (a, c) ~ 1 ==> (a, b c) ~ 1$
       - $1 ~ (a, c) ~ (a, (a c, b c)) ~ ((a, a c), b c) ~ (a, b c)$
     - Contrapositive: suppose irreducible $p$, $p divides.not a and p divides.not b$, #link(<irreducibility-in-poset>)[then] $(p, a) ~ 1 and (p, b) ~ 1$ and so $(p, a b) ~ 1$ meaning $p divides.not a b$
+- (2.16, p.152) $D$ UFD, $A(x) in D[x]$ is _primitive_ if there's no $D in.rev d divides A(x)$
+  - $A(x) = sum_(i=1)^k a_i x^i$ then consider $sum_(i=1)^k a_i / gcd(a_1, dots, a_k) x^i$
+  - $F$ field of fractions of domain $D$ and $A^prime (x) in F[x]$, _exists unique_ <equivalence-via-primitivity-shared-across-field-of-fractions> primitive $A in D[x]$ (up to _units in $D$_) with $A^prime = gamma A$ where $gamma in F$
+    - (IMHO) sharing primitives via _scalar scaling_ in $D$ and $F$ (_up to units in $D$_) is an equivalence relation not only on $D[x]$ but also extends over $F[x]$ and we can always find 'em via some scaling and $gcd$
+- (2.16, p.152) (Gauss lemma) <Gauss-lemma> $D$ UFD, $A(x)$ and $B(x)$ both primitive in $D[x]$, then $A(x) B(x)$ is also primitive
+  - Contrapositive: suppose some $d in D$ that are not unit s.t. $d divides A(x) B(x)$
+  - WLOG suppose $d$ irreducible, UFD thus prime, meaning $quo(D/((d)))$ domain thus $quo(D/((d)))[x]$ domain
+  - Observe that $tilde(A) tilde(B) = 0_(quo(D/((d)))[x])$ violating domain
+- (2.16, p.153) $D$ UFD, then irreducibility in $D[x]$ implies irreducibility in $F[x]$ <field-of-fractions-preserve-irreducibility> where $F$ field of fractions of $D$
+  - Contrapositive: suppose $A in D[x]$ is irreducible but reducible in $F[x]$ via $A = B C$, note $deg B > 0 and deg C > 0$
+  - There exists some ${mu, nu} subset.eq F$ with $B = mu B^prime$, $C = nu C^prime$, and #link(<equivalence-via-primitivity-shared-across-field-of-fractions>)[both $B^prime$ and $C^prime$ in $D[x]$ primitive] s.t. $A = mu nu B^prime C^prime$
+  - $B^prime C^prime$ primitive by #link(<Gauss-lemma>)[Gauss], and $A$ itself is already primitive thx to irreducibility
+  - Thus we get two different ways to show primitivity. They are the #link(<equivalence-via-primitivity-shared-across-field-of-fractions>)[same up to units], meaning there's some $u in D$ unit s.t. $A = u A^prime B^prime$, thereby violating irreducibility
+  - Conversely if irreducible in $F[x]$, its #link(<equivalence-via-primitivity-shared-across-field-of-fractions>)[primitive counterpart in $D[x]$] is also irreducible, since these two are associates in $F[x]$
+- (2.16, p.153) theorem 2.25 $D$ UFD then $D[x]$ UFD
+  - Need to check existence of factorization and uniqueness up to permutation and units
+  - Existence: degree argument
+  - Uniqueness: $D[x] in.rev A(x) = product_(i=1)^k d_i product_(i=1)^l q_i (x) = product_(i=1)^(k^prime) d^prime_i product_(i=1)^(l^prime) q^prime_i (x)$ two irreducible factorizations
+    - First assume $A$ is primitive so we're left to deal with $product_(i=1)^l q_i (x) = product_(i=1)^(l^prime) q^prime_i (x)$
+    - They are ackchyually irreducible in $F[x]$, #link(<field-of-fractions-preserve-irreducibility>)[too]
+    - We know $F$ field then $F[x]$ PID thus UFD, establishing the case
+    - For the general case WLOG (by multiplying units) we assume $product_(i=1)^k d_i = product_(i=1)^(k^prime) d^prime_i = scr(c)(A(x))$ the _content_ of $A$
+    - Thus the scalar part is clearly unique up to associates since $D$ UFD premise. Then we're back to $A$ primitive case.
+    - In short, factor into irreducibles, take the _content_ $scr(c)(A(x))$ out, then since irreducibility is maintained in $F[x]$ the polynomial ring by field of fractions the $deg > 0$ part is resolved by the fact PID implies UFD
 
 === Generic Remarks
 
