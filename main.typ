@@ -11,6 +11,14 @@
 
 #import "@preview/commute:0.3.0": arr, commutative-diagram, node
 
+#let skip_vector_marker = (
+  sym.dots,
+  sym.dots.h,
+  sym.dots.h.c,
+  sym.dots.v,
+  sym.dots.up,
+  sym.dots.down,
+)
 #let hl(content) = box(
   content,
   inset: 0.1em,
@@ -26,15 +34,19 @@
   set math.frac(style: "skewed")
   expr
 }
-#let row(expr) = { $cancel(#h(1em) expr #h(1em), angle: #90deg, stroke: #(dash: "dashed"))$ }
-#let col(expr) = { $cancel(#v(1em) expr #v(1em), angle: #0deg, stroke: #(dash: "dashed"))$ }
+#let row(expr) = {
+  $cancel(#h(1em) expr #h(1em), angle: #90deg, stroke: #(dash: "dashed", paint: black.transparentize(67%)))$
+}
+#let col(expr) = {
+  $cancel(#v(1em) expr #v(1em), angle: #0deg, stroke: #(dash: "dashed", paint: black.transparentize(67%)))$
+}
 #let rows(..exprs) = {
-  let arr = exprs.pos().map(row)
-  math.mat(..arr.map(x => (x,)))
+  let arr = exprs.pos().map(expr => if expr in skip_vector_marker [ #expr ] else [#row(expr)])
+  math.vec(..arr)
 }
 #let cols(..exprs) = {
-  let arr = exprs.pos().map(col)
-  math.mat(arr)
+  let arr = exprs.pos().map(expr => if expr in skip_vector_marker [ #expr ] else [#col(expr)])
+  math.mat(..arr)
 }
 
 #let aut = $op("Aut")$
