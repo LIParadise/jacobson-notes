@@ -52,6 +52,7 @@
 #let aut = $op("Aut")$
 #let endo = $op("End")$
 #let ann = $op("Ann")$
+#let hom = $op("Hom")$
 #let subgroup = $subset.eq^"group"$
 #let subideal = $subset.eq^"ideal"$
 #let submodule = $subset.eq^"module"$
@@ -682,7 +683,7 @@
   - $ker(mu_m) = {r in R where r m = 0}$, submodule, #link(<left-ideal-as-submodule>)[left-ideal].
   - $ann(x) := {r in R where r x = 0}$ left-ideal #link(<left-ideal-as-submodule>)[submodule] in $R$: $ R x tilde.eq quo(R / (ann(x))) $
     - Think of $ann(x) subideal ZZ$ in a $ZZ$-module. It's $(n)$ iff $op("ord")(x) = n$. So it's a generalization: _order ideal_.
-- (3.3, p.169) ring of endomorphisms of module $M$: $op("Hom")(M, M)$ where multiplication is composition and addition is pointwise
+- (3.3, p.169) ring of endomorphisms of module $M$: $hom(M, M)$ where multiplication is composition and addition is pointwise
 - (3.4, p.170) *base*: some set ${e_i} subset.eq M$ s.t. for all $m in M$, there _exists unique_ way to write $m = sum_(j=1)^k r_j e_j$
   - $R^((n))$ is s.t. for any ${m_i where 1<=i<=n} subset.eq M$ there exists unique module homomorphism $R^((n)) -> M$ given by $e_i mapsto m_i$. (IMHO) sort of universal property.
   - If some module $N$ also has some _base_ which enjoys such property, then similar to #link(<ch-2.10-thm-2.11>)[that of polynomial rings] we have $N tilde.eq R^((n))$. In this case $N$ is called _*free* module of rank $n$_.
@@ -703,6 +704,18 @@
         mat(row(bold(mu)_1); dots.v; row(bold(mu_m)))
       $
       - Ill-formed. Just the multiplication rule is alike: matrix multiply on the left is row combinations
+    - Basis, so $A = (a_(j i))$ and $B = (b_(i j))$ shall satisfy $A B = I_(m times m)$ and $B A = I_(n times n)$. Observe the entries (Kronecker delta) we have $m$ must equal to $n$.
+- (3.4, p.173) Consider $hom(R^((m)), R^((n)))$ as abelian group and thus left-$R$-module with basis ${mu_i}$ and ${nu_j}$ respectively
+  - $phi in hom(R^((m)), R^((n)))$ then we can _tabulate_ $phi$, writing the homomorphism down directly to have $ phi(mu_i) = sum_(j=1)^n a_(i j) nu_j $
+  - Equivalently
+    $ rows(phi(mu_1), dots.v, phi(mu_m)) =
+    mat(
+      a_(1 1), dots, a_(1 n);
+      dots.v, dots.down, dots.v;
+      a_(m 1), dots, a_(m n);
+    )
+    rows(nu_1, dots.v, nu_n) $ _the matrix of $phi$ relative to ordered basis ${mu_i where 1<=i<=m}$, ${nu_j where 1<=j<=n}$_
+  - $M_(m, n) (R) tilde.eq hom(R^((m)), R^((n)))$
 
 
 === Generic Remarks
