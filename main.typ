@@ -28,6 +28,14 @@
 }
 #let row(expr) = { $cancel(#h(1em) expr #h(1em), angle: #90deg, stroke: #(dash: "dashed"))$ }
 #let col(expr) = { $cancel(#v(1em) expr #v(1em), angle: #0deg, stroke: #(dash: "dashed"))$ }
+#let rows(..exprs) = {
+  let arr = exprs.pos().map(row)
+  math.mat(..arr.map(x => (x,)))
+}
+#let cols(..exprs) = {
+  let arr = exprs.pos().map(col)
+  math.mat(arr)
+}
 
 #let aut = $op("Aut")$
 #let endo = $op("End")$
@@ -672,11 +680,15 @@
     - $mu_j = sum_(i=1)^n a_(j i) nu_i$
     - $nu_i = sum_(j=1)^m b_(i j) mu_j$
     - $
-        mat(row(bold(mu)_1); dots.v; row(bold(mu_m))) = mat(a_(1 1), dots, a_(1 n); dots.v; a_(m 1), dots, a_(m n)) mat(row(bold(nu)_1); dots.v; row(bold(nu_n)))
+        mat(row(bold(mu)_1); dots.v; row(bold(mu_m))) =
+        mat(a_(1 1), dots, a_(1 n); dots.v, dots.down, dots.v; a_(m 1), dots, a_(m n))
+        mat(row(bold(nu)_1); dots.v; row(bold(nu_n)))
       $
       - Ill-formed. Just the multiplication rule is alike: matrix multiply on the left is row combinations
     - $
-        mat(row(bold(nu)_1); dots.v; row(bold(nu_n))) = mat(b_(1 1), dots, b_(1 m); dots.v; b_(n 1), dots, b_(n m)) mat(row(bold(mu)_1); dots.v; row(bold(mu_m)))
+        mat(row(bold(nu)_1); dots.v; row(bold(nu_n))) =
+        mat(b_(1 1), dots, b_(1 m); dots.v, dots.down, dots.v; b_(n 1), dots, b_(n m))
+        mat(row(bold(mu)_1); dots.v; row(bold(mu_m)))
       $
       - Ill-formed. Just the multiplication rule is alike: matrix multiply on the left is row combinations
 
