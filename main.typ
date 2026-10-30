@@ -631,7 +631,16 @@
     "It is clear that this property of the $x$s gives another characterization of the ring $R[x_1, x_2, dots, x_r]$ as an extension of $R$",
   )
   - WTF?
+  - #quote(
+      attribution: "Yu",
+      block: true,
+    )[It's just that the polynomial ring of $k$ indeterminates is isomorphic to the ring of polynomial type if you find $k$ algebraically independent elements in the larger ring]
 - #link(<ch-2.10-thm-2.11>)[universal property for polynomial rings]: it's intriguing that we can pick whatever element to send our indeterminates to, and there _exists unique_ ring homomorphism that accompany such choice(s). Kinda remind me of the layman's terms in (homogeneous) differential equation $y^(prime prime) + 2y^prime + y = 0$ that you "wiggle" your way out via multiplying with your solution at hand by $x$.
+- Given field $K$, consider $K[x]$, ${alpha, beta} subset.eq K supset.eq^"field" F$ are called _algebraic conjugates_ if $mu_alpha (beta) = 0$ whereby $mu_alpha$ the minimal polynomial of $alpha$
+  - Observe that any of $mu_alpha$'s factors (with positive degree) must vanish at $alpha$, since otherwise we just divide by it we'd get a polynomial with smaller degree.
+  - In similar vein consider $mu_beta divides mu_alpha$ so $mu_alpha (x) = mu_beta (x) g(x)$. Assume $beta != 0$ (is this necessary? what's minimal polynomial of 0?) and so $deg(mu_beta) > 0$. Then $deg(g) + deg(mu_beta) = deg(mu_alpha)$ so $g(alpha) != 0$ by minimal polynomial $mu_alpha$, meaning $mu_beta(a) = 0$. Thus they are associates and thus being algebraic conjugates is an equivalence relation.
+  - In fact minimal polynomials are irreducible.
+    - Prove: it's essentially the same observation. Suppose $mu_alpha = f dot g$ with WLOG $deg(mu_alpha) > deg(f) >= deg(g)$, $K$ field so domain, and so that $ mu_alpha (alpha) = 0 = f(alpha) g(alpha) $ is an immediate contradiction.
 
 == Chapter 3
 
@@ -790,6 +799,9 @@
     - Determinant is (alternating) multi-linear. Therefore when considering equivalent $B = Q A P^(-1)$, for any $i times i$-minor in $B$, it's some linear combination of minors of $A$. So $delta_i$ of $A$ divides that of $B$. Since being equivalent is an equivalence relation, we conclude equivalent matrices share the same $delta_i$
     - The existence of Smith normal form, $d_i divides d_(i+1)$, indicates $delta_i = product_(j = 1)^i d_j$, establishing the lemma
   - IMHO in a nut shell: module free f.g. over PID, then with suitable base and generators, submodule is described by Smith normal form
+- (3.8, p.187) Fundamental Structure Theorem for Finitely Generated Modules over PID
+  - Lemma: PID $D$, $D x = D y ==> ann(x) = ann(y)$
+    - Proof: commutative so $a x = 0 ==> a (r x) = 0$ and so $ann(x) subset.eq ann(r x)$, then notice we have two generators of the same cyclic $D$-module
 
 === Generic Remarks
 
@@ -797,6 +809,9 @@
   - Isomorphism between $C$ and $endo_ZZ (C)$: $c mapsto kappa mapsto c kappa$ (think of $quo(ZZ/((m)))$)
   - Isomorphism between $C^((n))$ and $endo_ZZ (C^((n)))$: element $phi$ in the latter is some $phi: RR^2 -> RR^2$ and is uniquely identified by certain matrix (assumping standard basis)
     - Just like neither $(1, 0)$ nor $(0, 1)$ is unit in $C^((2))$, neither $mat(1, 0; 0, 0)$ nor $mat(0, 0; 0, 1)$ is unit in $endo_ZZ (C^((n)))$
+- $M$ is left-$R$-module, if $m in M$ has $ann(m) = R$, then $1_R m = 0_M$ and so $m = 0_M$. I.e. $ann(m) = R <==> m = 0$
+- Let $R$ commutative ring and $M$ a left-$R$-module. Note _not_ all $I subideal R$ are s.t. $M$ an $quo(R / I)$-module
+  - Well-definedness: for any $r in R$ and $i in I$, consider $r^prime := r + i$ s.t. $r$ and $r^prime$ have the same image in $quo(R/I)$, then we need $ forall mu in M #h(1em) r mu = r^prime mu $ which means $(r-r^prime) mu = 0$ and thus $I subideal ann(M)$.
 
 === Questions
 
