@@ -7,6 +7,7 @@
 #show math.inter: math.limits
 #show math.inter.big: math.limits
 #show math.integral: math.limits
+#show math.xor.big: math.limits
 #show link: set text(fill: blue)
 
 #import "@preview/commute:0.3.0": arr, commutative-diagram, node
@@ -817,3 +818,5 @@
 
 - How to describe $endo_ZZ (M)$ for any $M$ abelian?
   - #link(<Cayley-rings-are-but-endomorphism-of-abelian-groups>)[Cayley]!
+- $dim$ is ambiguous since for any $R$ with nontrivial ideals, $R$ itself as $R$-module would have several nontrivial submodules. OTOH we know f.g. modules over PID can be factorized uniquely (up to ideals in $R$) as $ xor.big_(i=1)^l quo(D / ((d_i))) xor xor.big_(i=l+1)^k D $ in particular we got _elementary factors_ i.e. the prime powers $p_j^(e_(i j))$ in the set of factorizations of $d_i = product_(j=1)^(k_i) p_j^(e_(i j))$. What are preserved under module homomorphisms?
+  - Rank of linear transformations over vector spaces $phi: F -> F^prime$ tells us the $dim(im(phi))$: if we got spanning vectors ${f_i} subset.eq F$ then $im({f_i})$ is exactly $im(phi)$ and thus, as matrices, the product has rank $dim(im(phi))$ also. This also exlains why in matrix multiplication rank of product might be less then either of the operands: when the vectors happens not to span certain location in domain s.t. some of $im(phi)$ got lost.
